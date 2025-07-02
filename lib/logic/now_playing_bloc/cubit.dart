@@ -12,16 +12,26 @@ class NowPlayingCubit extends Cubit<NowPlayingStates> {
 
   ///
   Future getNowPlayingMovie() async {
+    print("1");
     emit(NowPlayingLoadingState());
     try {
+
+      print("2");
+
       /// GET DATA
       final response = await dio.get(ApiUrl.nowPlayingUrl);
+      print(response);
       if (response.statusCode == 200) {
+        print("3");
+
         final x = MovieListResponse.fromJson(response.data);
         emit(NowPlayingSuccessState(movieListResponse: x));
+        print("4");
+
       }
     } catch (e) {
       emit(NowPlayingErrorState(em: e.toString()));
+      print("========= Now Playing Error$e");
     }
   }
 }
