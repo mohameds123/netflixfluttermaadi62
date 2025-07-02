@@ -7,54 +7,61 @@ import 'package:netflixfluttermaadi62/presentation/widgets/now_playing_widget.da
 import 'package:netflixfluttermaadi62/presentation/widgets/popular_widget.dart';
 import 'package:netflixfluttermaadi62/presentation/widgets/top_rated_widget.dart';
 
+import '../../logic/popular_bloc/cubit.dart';
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => NowPlayingCubit()..getNowPlayingMovie(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context)=>NowPlayingCubit()..getNowPlayingMovie()),
+        BlocProvider(create: (context)=>PopularCubit()..getPopularMovie()),
+      ],
       child: Scaffold(
         backgroundColor: Colors.black,
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            NowPlayingWidget(),
-            Padding(
-              padding: const EdgeInsets.only(left: 8),
-              child: Text(Txt.popular,
-              style: TextStyle(
-                fontSize: 20,
-                color: ColorsManager.white,
-                fontWeight: FontWeight.w700,
-              ),
-              ),
-            ),
-            SizedBox(
-              height: 9,
-            ),
-            PopularWidget(),
-            SizedBox(
-              height: 9,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 8),
-              child: Text(Txt.topRated,
+        body: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              NowPlayingWidget(),
+              Padding(
+                padding: const EdgeInsets.only(left: 8),
+                child: Text(Txt.popular,
                 style: TextStyle(
                   fontSize: 20,
                   color: ColorsManager.white,
                   fontWeight: FontWeight.w700,
                 ),
+                ),
               ),
-            ),
-            SizedBox(
-              height: 9,
-            ),
-
-            TopRatedWidget(),
-
-
-          ],
+              SizedBox(
+                height: 9,
+              ),
+              PopularWidget(),
+              SizedBox(
+                height: 9,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 8),
+                child: Text(Txt.topRated,
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: ColorsManager.white,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 9,
+              ),
+          
+              TopRatedWidget(),
+          
+          
+            ],
+          ),
         ),
       ),
     );

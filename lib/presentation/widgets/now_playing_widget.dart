@@ -18,7 +18,7 @@ class NowPlayingWidget extends StatelessWidget {
     return BlocBuilder<NowPlayingCubit, NowPlayingStates>(
       builder: (context, state){
         if (state is NowPlayingLoadingState){
-          return Center(child: Lottie.asset('assets/animations/loading_animation.json'));
+          return Center(child: Lottie.asset('assets/animations/loading_animation.json',width: 100,height: 100));
 
       }else if (state is NowPlayingSuccessState) {
           return Stack(
