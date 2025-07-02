@@ -21,15 +21,17 @@ class NowPlayingWidget extends StatelessWidget {
           return Center(child: Lottie.asset('assets/animations/loading_animation.json',width: 100,height: 100));
 
       }else if (state is NowPlayingSuccessState) {
+          List movie = state.movieListResponse.results;
           return Stack(
             children: [
               SizedBox(
                 height: 370,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  itemCount: state.movieListResponse.results.length,
+                  itemCount: movie.length,
                   itemBuilder: (context, index) {
-                    return Image.network("https://image.tmdb.org/t/p/original${state.movieListResponse.results[index].posterPath}",
+
+                    return Image.network("https://image.tmdb.org/t/p/original${movie[index].posterPath}",
                         );
                   },
                 ),
@@ -51,7 +53,8 @@ class NowPlayingWidget extends StatelessWidget {
                       Txt.nowPlaying,
                       style: TextStyle(
                         fontSize: 24,
-                        fontWeight: FontWeight.w300,
+                        fontFamily: "Lato",
+                        fontWeight: FontWeight.w100,
                         color: ColorsManager.white,
                       ),
                     ),

@@ -31,6 +31,7 @@ class HomeScreen extends StatelessWidget {
                 child: Text(Txt.popular,
                 style: TextStyle(
                   fontSize: 20,
+                  fontFamily: "Lato",
                   color: ColorsManager.white,
                   fontWeight: FontWeight.w700,
                 ),
